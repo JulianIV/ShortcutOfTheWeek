@@ -1,0 +1,3071 @@
+<DOCTYPE HTML!>
+    <html>
+      <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <style>
+            .wrapper { 
+                font-family: sans-serif;
+                margin: auto;
+                
+                padding-top: 10%;
+                width: 50%;
+            }
+            .shortcut {
+                font-weight: bold;
+                font-size: 90px;
+                text-align: center;
+                cursor: pointer;
+            }
+            .description {
+                color: gray;
+                font-size: xx-large;
+                text-align: center;
+                cursor: pointer;
+            }
+        </style>
+      </head>
+      <body>
+        <div class="wrapper">
+            <div class="shortcut"></div>
+            <div class="description"></div>
+        </div>
+    
+        <script type="text/javascript">
+            $(document).ready(function(){
+                const shortcuts = [
+                    {
+                        "keybind": "Shift+Alt+3",
+                        "description": "Analyze.NavigateBackward"
+                    },
+                    {
+                        "keybind": "Shift+Alt+4",
+                        "description": "Analyze.NavigateForward"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, Ctrl+N",
+                        "description": "Architecture.NewDiagram"
+                    },
+                    {
+                        "keybind": "Ctrl+B",
+                        "description": "Build.BuildSelection"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+B",
+                        "description": "Build.BuildSolution"
+                    },
+                    {
+                        "keybind": "Ctrl+Break",
+                        "description": "Build.Cancel"
+                    },
+                    {
+                        "keybind": "Ctrl+F7",
+                        "description": "Build.Compile"
+                    },
+                    {
+                        "keybind": "Alt+F11",
+                        "description": "Build.RunCodeAnalysisonSolution"
+                    },
+                    {
+                        "keybind": "Alt+Enter",
+                        "description": "ClassViewContextMenus.ClassViewMultiselectProjectreferencesItems.Properties"
+                    },
+                    {
+                        "keybind": "Alt+F10",
+                        "description": "Debug.ApplyCodeChanges"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+V, A",
+                        "description": "Debug.Autos"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+Break",
+                        "description": "Debug.BreakAll"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+B",
+                        "description": "Debug.Breakpoints"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+C",
+                        "description": "Debug.CallStack"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+F9",
+                        "description": "Debug.DeleteAllBreakpoints"
+                    },
+                    {
+                        "keybind": "Alt+F2",
+                        "description": "Debug.DiagnosticsHub.Launch"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+D",
+                        "description": "Debug.Disassembly"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+V, D",
+                        "description": "Debug.DOMExplorer"
+                    },
+                    {
+                        "keybind": "Ctrl+F9",
+                        "description": "Debug.EnableBreakpoint"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+E",
+                        "description": "Debug.Exceptions"
+                    },
+                    {
+                        "keybind": "Ctrl+K, B",
+                        "description": "Debug.FunctionBreakpoint"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+F11",
+                        "description": "Debug.GoToPreviousCallorIntelliTraceEvent"
+                    },
+                    {
+                        "keybind": "Alt+F5",
+                        "description": "Debug.Graphics.StartDiagnostics"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+I",
+                        "description": "Debug.Immediate"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+Y, T",
+                        "description": "Debug.IntelliTraceCalls"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+Y, F",
+                        "description": "Debug.IntelliTraceEvents"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+V, C",
+                        "description": "Debug.JavaScriptConsole"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+V, L",
+                        "description": "Debug.Locals"
+                    },
+                    {
+                        "keybind": "Ctrl+5",
+                        "description": "Debug.LocationToolbar.ProcessCombo"
+                    },
+                    {
+                        "keybind": "Ctrl+7",
+                        "description": "Debug.LocationToolbar.StackFrameCombo"
+                    },
+                    {
+                        "keybind": "Ctrl+6",
+                        "description": "Debug.LocationToolbar.ThreadCombo"
+                    },
+                    {
+                        "keybind": "Ctrl+8",
+                        "description": "Debug.LocationToolbar.ToggleCurrentThreadFlaggedState"
+                    },
+                    {
+                        "keybind": "Ctrl+9",
+                        "description": "Debug.LocationToolbar.ToggleFlaggedThreads"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+M, 1",
+                        "description": "Debug.Memory1"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+M, 2",
+                        "description": "Debug.Memory2"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+M, 3",
+                        "description": "Debug.Memory3"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+M, 4",
+                        "description": "Debug.Memory4"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+U",
+                        "description": "Debug.Modules"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+D, S",
+                        "description": "Debug.ParallelStacks"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+D, 1",
+                        "description": "Debug.ParallelWatch1"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+D, 2",
+                        "description": "Debug.ParallelWatch2"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+D, 3",
+                        "description": "Debug.ParallelWatch3"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+D, 4",
+                        "description": "Debug.ParallelWatch4"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+Z",
+                        "description": "Debug.Processes"
+                    },
+                    {
+                        "keybind": "Shift+F9",
+                        "description": "Debug.QuickWatch"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+R",
+                        "description": "Debug.RefreshWindowsapp"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+G",
+                        "description": "Debug.Registers"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+F5",
+                        "description": "Debug.Restart"
+                    },
+                    {
+                        "keybind": "Ctrl+F10",
+                        "description": "Debug.RunToCursor"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+F10",
+                        "description": "Debug.SetNextStatement"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+`",
+                        "description": "Debug.ShowCallStackonCodeMap"
+                    },
+                    {
+                        "keybind": "Alt+Num",
+                        "description": "Debug.ShowNextStatement"
+                    },
+                    {
+                        "keybind": "F5",
+                        "description": "Debug.Start"
+                    },
+                    {
+                        "keybind": "Alt+F1",
+                        "description": "Debug.StartWindowsPhoneApplicationAnalysis"
+                    },
+                    {
+                        "keybind": "Ctrl+F5",
+                        "description": "Debug.StartWithoutDebugging"
+                    },
+                    {
+                        "keybind": "F11",
+                        "description": "Debug.StepInto"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+F11",
+                        "description": "Debug.StepIntoCurrentProcess"
+                    },
+                    {
+                        "keybind": "Shift+Alt+F11",
+                        "description": "Debug.StepIntoSpecific"
+                    },
+                    {
+                        "keybind": "Shift+F11",
+                        "description": "Debug.StepOut"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Alt+F11",
+                        "description": "Debug.StepOutCurrentProcess"
+                    },
+                    {
+                        "keybind": "F10",
+                        "description": "Debug.StepOver"
+                    },
+                    {
+                        "keybind": "F10",
+                        "description": "Debug.StepOver"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+F10",
+                        "description": "Debug.StepOverCurrentProcess"
+                    },
+                    {
+                        "keybind": "Shift+F5",
+                        "description": "Debug.StopDebugging"
+                    },
+                    {
+                        "keybind": "Shift+Alt+F2",
+                        "description": "Debug.StopPerformanceAnalysis"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+D, K",
+                        "description": "Debug.Tasks"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+H",
+                        "description": "Debug.Threads"
+                    },
+                    {
+                        "keybind": "F9",
+                        "description": "Debug.ToggleBreakpoint"
+                    },
+                    {
+                        "keybind": "Ctrl+F11",
+                        "description": "Debug.ToggleDisassembly"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+W, 1",
+                        "description": "Debug.Watch1"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+W, 2",
+                        "description": "Debug.Watch2"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+W, 3",
+                        "description": "Debug.Watch3"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+W, 4",
+                        "description": "Debug.Watch4"
+                    },
+                    {
+                        "keybind": "Alt+F9, D",
+                        "description": "DebuggerContextMenus.BreakpointsWindow.Delete"
+                    },
+                    {
+                        "keybind": "Alt+F9, A",
+                        "description": "DebuggerContextMenus.BreakpointsWindow.GoToDisassembly"
+                    },
+                    {
+                        "keybind": "Alt+F9, S",
+                        "description": "DebuggerContextMenus.BreakpointsWindow.GoToSourceCode"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+F2",
+                        "description": "DiagnosticsHub.StopCollection"
+                    },
+                    {
+                        "keybind": "Ctrl+C",
+                        "description": "Edit.Copy"
+                    },
+                    {
+                        "keybind": "Ctrl+X",
+                        "description": "Edit.Cut"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+V",
+                        "description": "Edit.CycleClipboardRing"
+                    },
+                    {
+                        "keybind": "Delete",
+                        "description": "Edit.Delete"
+                    },
+                    {
+                        "keybind": "Ctrl+D",
+                        "description": "Edit.Duplicate"
+                    },
+                    {
+                        "keybind": "Ctrl+F",
+                        "description": "Edit.Find"
+                    },
+                    {
+                        "keybind": "Shift+F12",
+                        "description": "Edit.FindAllReferences"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+F",
+                        "description": "Edit.FindinFiles"
+                    },
+                    {
+                        "keybind": "F3",
+                        "description": "Edit.FindNext"
+                    },
+                    {
+                        "keybind": "Ctrl+F3",
+                        "description": "Edit.FindNextSelected"
+                    },
+                    {
+                        "keybind": "Shift+F3",
+                        "description": "Edit.FindPrevious"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+F3",
+                        "description": "Edit.FindPreviousSelected"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+M",
+                        "description": "Edit.GenerateMethod"
+                    },
+                    {
+                        "keybind": "Ctrl+G",
+                        "description": "Edit.GoTo"
+                    },
+                    {
+                        "keybind": "Ctrl+,",
+                        "description": "Edit.GoToAll"
+                    },
+                    {
+                        "keybind": "Ctrl+F12",
+                        "description": "Edit.GoToDeclaration"
+                    },
+                    {
+                        "keybind": "F12",
+                        "description": "Edit.GoToDefinition"
+                    },
+                    {
+                        "keybind": "Ctrl+1, Ctrl+M",
+                        "description": "Edit.GoToMember"
+                    },
+                    {
+                        "keybind": "F8",
+                        "description": "Edit.GoToNextLocation"
+                    },
+                    {
+                        "keybind": "Shift+F8",
+                        "description": "Edit.GoToPrevLocation"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+X",
+                        "description": "Edit.InsertSnippet"
+                    },
+                    {
+                        "keybind": "Ctrl+Down Arrow",
+                        "description": "Edit.MoveControlDown"
+                    },
+                    {
+                        "keybind": "Down Arrow",
+                        "description": "Edit.MoveControlDownGrid"
+                    },
+                    {
+                        "keybind": "Ctrl+Left Arrow",
+                        "description": "Edit.MoveControlLeft"
+                    },
+                    {
+                        "keybind": "Left Arrow",
+                        "description": "Edit.MoveControlLeftGrid"
+                    },
+                    {
+                        "keybind": "Ctrl+Right Arrow",
+                        "description": "Edit.MoveControlRight"
+                    },
+                    {
+                        "keybind": "Right Arrow",
+                        "description": "Edit.MoveControlRightGrid"
+                    },
+                    {
+                        "keybind": "Ctrl+Up Arrow",
+                        "description": "Edit.MoveControlUp"
+                    },
+                    {
+                        "keybind": "Up Arrow",
+                        "description": "Edit.MoveControlUpGrid"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+N",
+                        "description": "Edit.NextBookmark"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+K, Ctrl+Shift+N",
+                        "description": "Edit.NextBookmarkInFolder"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+G",
+                        "description": "Edit.OpenFile"
+                    },
+                    {
+                        "keybind": "Ctrl+V",
+                        "description": "Edit.Paste"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+P",
+                        "description": "Edit.PreviousBookmark"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+K, Ctrl+Shift+P",
+                        "description": "Edit.PreviousBookmarkInFolder"
+                    },
+                    {
+                        "keybind": "Shift+Alt+F12",
+                        "description": "Edit.QuickFindSymbol"
+                    },
+                    {
+                        "keybind": "Ctrl+Y",
+                        "description": "Edit.Redo"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+J",
+                        "description": "Edit.RefreshRemoteReferences"
+                    },
+                    {
+                        "keybind": "Ctrl+H",
+                        "description": "Edit.Replace"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+H",
+                        "description": "Edit.ReplaceinFiles"
+                    },
+                    {
+                        "keybind": "Ctrl+A",
+                        "description": "Edit.SelectAll"
+                    },
+                    {
+                        "keybind": "Tab",
+                        "description": "Edit.SelectNextControl"
+                    },
+                    {
+                        "keybind": "Shift+Tab",
+                        "description": "Edit.SelectPreviousControl"
+                    },
+                    {
+                        "keybind": "Enter",
+                        "description": "Edit.ShowTileGrid"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Down Arrow",
+                        "description": "Edit.SizeControlDown"
+                    },
+                    {
+                        "keybind": "Shift+Down Arrow",
+                        "description": "Edit.SizeControlDownGrid"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Left Arrow",
+                        "description": "Edit.SizeControlLeft"
+                    },
+                    {
+                        "keybind": "Shift+Left Arrow",
+                        "description": "Edit.SizeControlLeftGrid"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Right Arrow",
+                        "description": "Edit.SizeControlRight"
+                    },
+                    {
+                        "keybind": "Shift+Right Arrow",
+                        "description": "Edit.SizeControlRightGrid"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Up Arrow",
+                        "description": "Edit.SizeControlUp"
+                    },
+                    {
+                        "keybind": "Shift+Up Arrow",
+                        "description": "Edit.SizeControlUpGrid"
+                    },
+                    {
+                        "keybind": "Alt+F3, S",
+                        "description": "Edit.StopSearch"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+S",
+                        "description": "Edit.SurroundWith"
+                    },
+                    {
+                        "keybind": "Ctrl+Z",
+                        "description": "Edit.Undo"
+                    },
+                    {
+                        "keybind": "Alt+F9, L",
+                        "description": "EditorContextMenus.CodeWindow.Breakpoint.BreakpointEditlabels"
+                    },
+                    {
+                        "keybind": "Ctrl+`",
+                        "description": "EditorContextMenus.CodeWindow.CodeMap.ShowItem"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+F5",
+                        "description": "EditorContextMenus.CodeWindow.Execute"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+G",
+                        "description": "EditorContextMenus.CodeWindow.GoToView"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+O",
+                        "description": "EditorContextMenus.CodeWindow.ToggleHeaderCodeFile"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+T",
+                        "description": "EditorContextMenus.CodeWindow.ViewCallHierarchy"
+                    },
+                    {
+                        "keybind": "Alt+F4",
+                        "description": "File.Exit"
+                    },
+                    {
+                        "keybind": "Ctrl+N",
+                        "description": "File.NewFile"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+N",
+                        "description": "File.NewProject"
+                    },
+                    {
+                        "keybind": "Shift+Alt+N",
+                        "description": "File.NewWebSite"
+                    },
+                    {
+                        "keybind": "Ctrl+O",
+                        "description": "File.OpenFile"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+O",
+                        "description": "File.OpenProject"
+                    },
+                    {
+                        "keybind": "Shift+Alt+O",
+                        "description": "File.OpenWebSite"
+                    },
+                    {
+                        "keybind": "Ctrl+P",
+                        "description": "File.Print"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+S",
+                        "description": "File.SaveAll"
+                    },
+                    {
+                        "keybind": "Ctrl+S",
+                        "description": "File.SaveSelectedItems"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+W",
+                        "description": "File.ViewinBrowser"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+F1",
+                        "description": "Help.AddandRemoveHelpContent"
+                    },
+                    {
+                        "keybind": "F1",
+                        "description": "Help.F1Help"
+                    },
+                    {
+                        "keybind": "Ctrl+F1",
+                        "description": "Help.ViewHelp"
+                    },
+                    {
+                        "keybind": "Shift+F1",
+                        "description": "Help.WindowHelp"
+                    },
+                    {
+                        "keybind": "Ctrl+R, Q",
+                        "description": "LoadTest.JumpToCounterPane"
+                    },
+                    {
+                        "keybind": "Insert",
+                        "description": "OtherContextMenus.MicrosoftDataEntityDesignContext.AddNewDiagram"
+                    },
+                    {
+                        "keybind": "Shift+Alt+A",
+                        "description": "Project.AddExistingItem"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+A",
+                        "description": "Project.AddNewItem"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+X",
+                        "description": "Project.ClassWizard"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+Ins",
+                        "description": "Project.Override"
+                    },
+                    {
+                        "keybind": "Alt+;",
+                        "description": "Project.Previewchanges"
+                    },
+                    {
+                        "keybind": "Alt+;",
+                        "description": "Project.Publishselectedfiles"
+                    },
+                    {
+                        "keybind": "Alt+;",
+                        "description": "Project.Replaceselectedfilesfromserver"
+                    },
+                    {
+                        "keybind": "Alt+Down Arrow",
+                        "description": "ProjectandSolutionContextMenus.Item.MoveDown"
+                    },
+                    {
+                        "keybind": "Alt+Up Arrow",
+                        "description": "ProjectandSolutionContextMenus.Item.MoveUp"
+                    },
+                    {
+                        "keybind": "Ctrl+R, Ctrl+E",
+                        "description": "Refactor.EncapsulateField"
+                    },
+                    {
+                        "keybind": "Ctrl+R, Ctrl+I",
+                        "description": "Refactor.ExtractInterface"
+                    },
+                    {
+                        "keybind": "Ctrl+R, Ctrl+M",
+                        "description": "Refactor.ExtractMethod"
+                    },
+                    {
+                        "keybind": "Ctrl+R, Ctrl+V",
+                        "description": "Refactor.RemoveParameters"
+                    },
+                    {
+                        "keybind": "Ctrl+R, Ctrl+R",
+                        "description": "Refactor.Rename"
+                    },
+                    {
+                        "keybind": "Ctrl+R, Ctrl+O",
+                        "description": "Refactor.ReorderParameters"
+                    },
+                    {
+                        "keybind": "Ctrl+[",
+                        "description": "SolutionExplorer.OpenFilesFilter"
+                    },
+                    {
+                        "keybind": "Ctrl+[",
+                        "description": "SolutionExplorer.PendingChangesFilter"
+                    },
+                    {
+                        "keybind": "Ctrl+[",
+                        "description": "SolutionExplorer.SyncWithActiveDocument"
+                    },
+                    {
+                        "keybind": "Ctrl+0",
+                        "description": "Team.Git.GoToGitBranches"
+                    },
+                    {
+                        "keybind": "Ctrl+0",
+                        "description": "Team.Git.GoToGitChanges"
+                    },
+                    {
+                        "keybind": "Ctrl+0",
+                        "description": "Team.Git.GoToGitCommits"
+                    },
+                    {
+                        "keybind": "Ctrl+'",
+                        "description": "Team.TeamExplorerSearch"
+                    },
+                    {
+                        "keybind": "Ctrl+0",
+                        "description": "TeamFoundationContextMenus.Commands.GoToBuilds"
+                    },
+                    {
+                        "keybind": "Ctrl+0",
+                        "description": "TeamFoundationContextMenus.Commands.GoToConnect"
+                    },
+                    {
+                        "keybind": "Ctrl+0",
+                        "description": "TeamFoundationContextMenus.Commands.GoToDocuments"
+                    },
+                    {
+                        "keybind": "Ctrl+0",
+                        "description": "TeamFoundationContextMenus.Commands.GoToHome"
+                    },
+                    {
+                        "keybind": "Ctrl+0",
+                        "description": "TeamFoundationContextMenus.Commands.GoToMyWork"
+                    },
+                    {
+                        "keybind": "Ctrl+0",
+                        "description": "TeamFoundationContextMenus.Commands.GoToPendingChanges"
+                    },
+                    {
+                        "keybind": "Ctrl+0",
+                        "description": "TeamFoundationContextMenus.Commands.GoToReports"
+                    },
+                    {
+                        "keybind": "Ctrl+0",
+                        "description": "TeamFoundationContextMenus.Commands.GoToSettings"
+                    },
+                    {
+                        "keybind": "Ctrl+0",
+                        "description": "TeamFoundationContextMenus.Commands.GoToWebAccess"
+                    },
+                    {
+                        "keybind": "Ctrl+0",
+                        "description": "TeamFoundationContextMenus.Commands.GoToWorkItems"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, Ctrl+C",
+                        "description": "Test.UseCodedUITestBuilder"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, Ctrl+A",
+                        "description": "Test.UseExistingActionRecording"
+                    },
+                    {
+                        "keybind": "Ctrl+R, Ctrl+A",
+                        "description": "TestExplorer.DebugAllTests"
+                    },
+                    {
+                        "keybind": "Ctrl+R, Ctrl+T",
+                        "description": "TestExplorer.DebugAllTestsInContext"
+                    },
+                    {
+                        "keybind": "Ctrl+R, D",
+                        "description": "TestExplorer.DebugLastRun"
+                    },
+                    {
+                        "keybind": "Ctrl+R, L",
+                        "description": "TestExplorer.RepeatLastRun"
+                    },
+                    {
+                        "keybind": "Ctrl+R, A",
+                        "description": "TestExplorer.RunAllTests"
+                    },
+                    {
+                        "keybind": "Ctrl+R, T",
+                        "description": "TestExplorer.RunAllTestsInContext"
+                    },
+                    {
+                        "keybind": "Ctrl+E, T",
+                        "description": "TestExplorer.ShowTestExplorer"
+                    },
+                    {
+                        "keybind": "Ctrl+E, L",
+                        "description": "LiveUnitTesting.OpenTab"
+                    },
+                    {
+                        "keybind": "Ctrl+E, C",
+                        "description": "Test.CodeCoverageResults"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+P",
+                        "description": "Tools.AttachtoProcess"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+B",
+                        "description": "Tools.CodeSnippetsManager"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Alt+F12, Ctrl+Shift+Alt+F12",
+                        "description": "Tools.ForceGC"
+                    },
+                    {
+                        "keybind": "Shift+Alt+M",
+                        "description": "View.AllWindows"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, Ctrl+R",
+                        "description": "View.ArchitectureExplorer"
+                    },
+                    {
+                        "keybind": "Alt+Left Arrow",
+                        "description": "View.Backward"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+W",
+                        "description": "View.BookmarkWindow"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+1",
+                        "description": "View.BrowseNext"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+2",
+                        "description": "View.BrowsePrevious"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+K",
+                        "description": "View.CallHierarchy"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+C",
+                        "description": "View.ClassView"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+V",
+                        "description": "View.ClassViewGoToSearchCombo"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, D",
+                        "description": "View.CodeDefinitionWindow"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+A",
+                        "description": "View.CommandWindow"
+                    },
+                    {
+                        "keybind": "Shift+Alt+D",
+                        "description": "View.DataSources"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+T",
+                        "description": "View.DocumentOutline"
+                    },
+                    {
+                        "keybind": "F2",
+                        "description": "View.EditLabel"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, E",
+                        "description": "View.ErrorList"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+F",
+                        "description": "View.F#Interactive"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+F12",
+                        "description": "View.FindSymbolResults"
+                    },
+                    {
+                        "keybind": "Alt+Right Arrow",
+                        "description": "View.Forward"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+7",
+                        "description": "View.ForwardBrowseContext"
+                    },
+                    {
+                        "keybind": "Shift+Alt+Enter",
+                        "description": "View.FullScreen"
+                    },
+                    {
+                        "keybind": "Ctrl+-",
+                        "description": "View.NavigateBackward"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+-",
+                        "description": "View.NavigateForward"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+F12",
+                        "description": "View.NextError"
+                    },
+                    {
+                        "keybind": "Ctrl+W, N",
+                        "description": "View.Notifications"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+J",
+                        "description": "View.ObjectBrowser"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+R",
+                        "description": "View.ObjectBrowserGoToSearchCombo"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+O",
+                        "description": "View.Output"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+8",
+                        "description": "View.PopBrowseContext"
+                    },
+                    {
+                        "keybind": "F4",
+                        "description": "View.PropertiesWindow"
+                    },
+                    {
+                        "keybind": "Shift+F4",
+                        "description": "View.PropertyPages"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+E",
+                        "description": "View.ResourceView"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+S",
+                        "description": "View.ServerExplorer"
+                    },
+                    {
+                        "keybind": "Shift+Alt+F10",
+                        "description": "View.ShowSmartTag"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+L",
+                        "description": "View.SolutionExplorer"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, Ctrl+S",
+                        "description": "View.SQLServerObjectExplorer"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, T",
+                        "description": "View.TaskList"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, Ctrl+M",
+                        "description": "View.TfsTeamExplorer"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+X",
+                        "description": "View.Toolbox"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, Ctrl+U",
+                        "description": "View.UMLModelExplorer"
+                    },
+                    {
+                        "keybind": "F7",
+                        "description": "View.ViewCode"
+                    },
+                    {
+                        "keybind": "Shift+F7",
+                        "description": "View.ViewDesigner"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+R",
+                        "description": "View.WebBrowser"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+.",
+                        "description": "View.ZoomIn"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+,",
+                        "description": "View.ZoomOut"
+                    },
+                    {
+                        "keybind": "Ctrl+E, T",
+                        "description": "TestExplorer.ShowTestExplorer"
+                    },
+                    {
+                        "keybind": "Esc",
+                        "description": "Window.ActivateDocumentWindow"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Alt+Space",
+                        "description": "Window.AddTabtoSelection"
+                    },
+                    {
+                        "keybind": "Ctrl+F4",
+                        "description": "Window.CloseDocumentWindow"
+                    },
+                    {
+                        "keybind": "Shift+Esc",
+                        "description": "Window.CloseToolWindow"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+Home",
+                        "description": "Window.KeepTabOpen"
+                    },
+                    {
+                        "keybind": "Ctrl+F2",
+                        "description": "Window.MovetoNavigationBar"
+                    },
+                    {
+                        "keybind": "Ctrl+F6",
+                        "description": "Window.NextDocumentWindow"
+                    },
+                    {
+                        "keybind": "Ctrl+Tab",
+                        "description": "Window.NextDocumentWindowNav"
+                    },
+                    {
+                        "keybind": "Alt+F6",
+                        "description": "Window.NextPane"
+                    },
+                    {
+                        "keybind": "F6",
+                        "description": "Window.NextSplitPane"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+PgDn",
+                        "description": "Window.NextTab"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Alt+PgDn",
+                        "description": "Window.NextTabandAddtoSelection"
+                    },
+                    {
+                        "keybind": "Alt+F7",
+                        "description": "Window.NextToolWindowNav"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+F6",
+                        "description": "Window.PreviousDocumentWindow"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Tab",
+                        "description": "Window.PreviousDocumentWindowNav"
+                    },
+                    {
+                        "keybind": "Shift+Alt+F6",
+                        "description": "Window.PreviousPane"
+                    },
+                    {
+                        "keybind": "Shift+F6",
+                        "description": "Window.PreviousSplitPane"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+PgUp",
+                        "description": "Window.PreviousTab"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Alt+PgUp",
+                        "description": "Window.PreviousTabandAddtoSelection"
+                    },
+                    {
+                        "keybind": "Shift+Alt+F7",
+                        "description": "Window.PreviousToolWindowNav"
+                    },
+                    {
+                        "keybind": "Ctrl+Q",
+                        "description": "Window.QuickLaunch"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Q",
+                        "description": "Window.QuickLaunchPreviousCategory"
+                    },
+                    {
+                        "keybind": "Alt+-",
+                        "description": "Window.ShowDockMenu"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+Down Arrow",
+                        "description": "Window.ShowEzMDIFileList"
+                    },
+                    {
+                        "keybind": "Ctrl+;",
+                        "description": "Window.SolutionExplorerSearch"
+                    },
+                    {
+                        "keybind": "Alt+`",
+                        "description": "Window.WindowSearch"
+                    },
+                    {
+                        "keybind": "Ctrl+Num *, Ctrl+R",
+                        "description": "WindowsAzure.RetryMobileServiceScriptOperation"
+                    },
+                    {
+                        "keybind": "Ctrl+Num *, Ctrl+D",
+                        "description": "WindowsAzure.ShowMobileServiceScriptErrorDetails"
+                    },
+                    {
+                        "keybind": "Alt+Down Arrow",
+                        "description": "OtherContextMenus.MicrosoftDataEntityDesignContext.MoveProperties.Down"
+                    },
+                    {
+                        "keybind": "Alt+PgDn",
+                        "description": "OtherContextMenus.MicrosoftDataEntityDesignContext.MoveProperties.Down5"
+                    },
+                    {
+                        "keybind": "Alt+End",
+                        "description": "OtherContextMenus.MicrosoftDataEntityDesignContext.MoveProperties.ToBottom"
+                    },
+                    {
+                        "keybind": "Alt+Home",
+                        "description": "OtherContextMenus.MicrosoftDataEntityDesignContext.MoveProperties.ToTop"
+                    },
+                    {
+                        "keybind": "Alt+Up Arrow",
+                        "description": "OtherContextMenus.MicrosoftDataEntityDesignContext.MoveProperties.Up"
+                    },
+                    {
+                        "keybind": "Alt+PgUp",
+                        "description": "OtherContextMenus.MicrosoftDataEntityDesignContext.MoveProperties.Up5"
+                    },
+                    {
+                        "keybind": "Ctrl+R, R",
+                        "description": "OtherContextMenus.MicrosoftDataEntityDesignContext.Refactor.Rename"
+                    },
+                    {
+                        "keybind": "Shift+Del",
+                        "description": "OtherContextMenus.MicrosoftDataEntityDesignContext.RemovefromDiagram"
+                    },
+                    {
+                        "keybind": "Ctrl+1",
+                        "description": "View.EntityDataModelBrowser"
+                    },
+                    {
+                        "keybind": "Ctrl+2",
+                        "description": "View.EntityDataModelMappingDetails"
+                    },
+                    {
+                        "keybind": "Num -",
+                        "description": "ClassDiagram.Collapse"
+                    },
+                    {
+                        "keybind": "Num +",
+                        "description": "ClassDiagram.Expand"
+                    },
+                    {
+                        "keybind": "Ctrl+Del",
+                        "description": "Edit.Delete"
+                    },
+                    {
+                        "keybind": "Shift+Alt+B",
+                        "description": "Edit.ExpandCollapseBaseTypeList"
+                    },
+                    {
+                        "keybind": "Shift+Alt+L",
+                        "description": "Edit.NavigateToLollipop"
+                    },
+                    {
+                        "keybind": "Delete",
+                        "description": "Edit.RemovefromDiagram"
+                    },
+                    {
+                        "keybind": "Enter",
+                        "description": "View.ViewCode"
+                    },
+                    {
+                        "keybind": "Ctrl+C",
+                        "description": "OtherContextMenus.UITestEditorContextMenu.CopyReferencetoClipboard"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+D",
+                        "description": "OtherContextMenus.UITestEditorContextMenu.InsertDelayBefore"
+                    },
+                    {
+                        "keybind": "Shift+Alt+L",
+                        "description": "OtherContextMenus.UITestEditorContextMenu.LocateAll"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+L",
+                        "description": "OtherContextMenus.UITestEditorContextMenu.LocatetheUIControl"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+C",
+                        "description": "OtherContextMenus.UITestEditorContextMenu.Movecode"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+T",
+                        "description": "OtherContextMenus.UITestEditorContextMenu.Splitintoanewmethod"
+                    },
+                    {
+                        "keybind": "Insert",
+                        "description": "OtherContextMenus.ColumnContext.InsertColumn"
+                    },
+                    {
+                        "keybind": "Ctrl+L",
+                        "description": "OtherContextMenus.DbTableContext.Add.Column"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, Ctrl+Spacebar",
+                        "description": "Diff.IgnoreTrimWhitespace"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, Ctrl+1",
+                        "description": "Diff.InlineView"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, Ctrl+3",
+                        "description": "Diff.LeftOnlyView"
+                    },
+                    {
+                        "keybind": "F8",
+                        "description": "Diff.NextDifference"
+                    },
+                    {
+                        "keybind": "Shift+F8",
+                        "description": "Diff.PreviousDifference"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, Ctrl+4",
+                        "description": "Diff.RightOnlyView"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, Ctrl+2",
+                        "description": "Diff.SideBySideView"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, Ctrl+Tab",
+                        "description": "Diff.SwitchBetweenLeftAndRight"
+                    },
+                    {
+                        "keybind": "Ctrl+\\, Ctrl+Down Arrow",
+                        "description": "Diff.SynchronizeViewToggle"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+K",
+                        "description": "EditorContextMenus.CodeWindow.AddComment"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+P",
+                        "description": "EditorContextMenus.CodeWindow.EditLocalFile"
+                    },
+                    {
+                        "keybind": "F5",
+                        "description": "DOMExplorer.Refresh"
+                    },
+                    {
+                        "keybind": "Ctrl+B",
+                        "description": "DOMExplorer.SelectElement"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+I",
+                        "description": "DOMExplorer.ShowLayout"
+                    },
+                    {
+                        "keybind": "Ctrl+Break",
+                        "description": "OtherContextMenus.FSIConsoleContext.CancelInteractiveEvaluation"
+                    },
+                    {
+                        "keybind": "Insert",
+                        "description": "ArchitectureContextMenus.DirectedGraphContextMenu.Advanced.Add.AddNode"
+                    },
+                    {
+                        "keybind": "B",
+                        "description": "ArchitectureContextMenus.DirectedGraphContextMenu.Advanced.Select.BothDependencies"
+                    },
+                    {
+                        "keybind": "I",
+                        "description": "ArchitectureContextMenus.DirectedGraphContextMenu.Advanced.Select.IncomingDependencies"
+                    },
+                    {
+                        "keybind": "O",
+                        "description": "ArchitectureContextMenus.DirectedGraphContextMenu.Advanced.Select.OutgoingDependencies"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+K",
+                        "description": "ArchitectureContextMenus.DirectedGraphContextMenu.NewComment"
+                    },
+                    {
+                        "keybind": "Delete",
+                        "description": "ArchitectureContextMenus.DirectedGraphContextMenu.Remove"
+                    },
+                    {
+                        "keybind": "F2",
+                        "description": "ArchitectureContextMenus.DirectedGraphContextMenu.Rename"
+                    },
+                    {
+                        "keybind": "Shift+Alt+Down Arrow",
+                        "description": "Graphics.MovePixelSelectionDown"
+                    },
+                    {
+                        "keybind": "Shift+Alt+Left Arrow",
+                        "description": "Graphics.MovePixelSelectionLeft"
+                    },
+                    {
+                        "keybind": "Shift+Alt+Right Arrow",
+                        "description": "Graphics.MovePixelSelectionRight"
+                    },
+                    {
+                        "keybind": "Shift+Alt+Up Arrow",
+                        "description": "Graphics.MovePixelSelectionUp"
+                    },
+                    {
+                        "keybind": "Shift+Alt+0",
+                        "description": "Graphics.ZoomToActualSize"
+                    },
+                    {
+                        "keybind": "Shift+Alt+9",
+                        "description": "Graphics.ZoomToFitInWindow"
+                    },
+                    {
+                        "keybind": "Shift+Alt+=",
+                        "description": "Graphics.ZoomIn"
+                    },
+                    {
+                        "keybind": "Shift+Alt+-",
+                        "description": "Graphics.ZoomOut"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+G",
+                        "description": "OtherContextMenus.HTMLContext.GoToController"
+                    },
+                    {
+                        "keybind": "Ctrl+Down Arrow",
+                        "description": "Edit.MoveControlDown"
+                    },
+                    {
+                        "keybind": "Ctrl+Up Arrow",
+                        "description": "Edit.MoveControlUp"
+                    },
+                    {
+                        "keybind": "Ctrl+B",
+                        "description": "Format.Bold"
+                    },
+                    {
+                        "keybind": "Ctrl+L",
+                        "description": "Format.ConverttoHyperlink"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+L",
+                        "description": "Format.InsertBookmark"
+                    },
+                    {
+                        "keybind": "Ctrl+I",
+                        "description": "Format.Italic"
+                    },
+                    {
+                        "keybind": "Ctrl+U",
+                        "description": "Format.Underline"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+C",
+                        "description": "Project.AddContentPage"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+Left Arrow",
+                        "description": "Table.ColumntotheLeft"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+Right Arrow",
+                        "description": "Table.ColumntotheRight"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+Up Arrow",
+                        "description": "Table.RowAbove"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+Down Arrow",
+                        "description": "Table.RowBelow"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+N",
+                        "description": "View.ASP.NETNonvisualControls"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+M",
+                        "description": "View.EditMaster"
+                    },
+                    {
+                        "keybind": "Ctrl+PgDn",
+                        "description": "View.NextView"
+                    },
+                    {
+                        "keybind": "Shift+Alt+F10",
+                        "description": "View.ShowSmartTag"
+                    },
+                    {
+                        "keybind": "Shift+F7",
+                        "description": "View.ViewMarkup"
+                    },
+                    {
+                        "keybind": "Ctrl+PgUp",
+                        "description": "Window.PreviousTab"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+G",
+                        "description": "OtherContextMenus.HTMLContext.GoToController"
+                    },
+                    {
+                        "keybind": "Ctrl+PgDn",
+                        "description": "View.NextView"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Y",
+                        "description": "View.SynchronizeViews"
+                    },
+                    {
+                        "keybind": "Shift+F7",
+                        "description": "View.ViewDesigner"
+                    },
+                    {
+                        "keybind": "Ctrl+PgUp",
+                        "description": "Window.PreviousTab"
+                    },
+                    {
+                        "keybind": "Shift+Delete",
+                        "description": "Edit.Delete"
+                    },
+                    {
+                        "keybind": "F2",
+                        "description": "Edit.EditCell"
+                    },
+                    {
+                        "keybind": "Delete",
+                        "description": "Edit.Remove"
+                    },
+                    {
+                        "keybind": "Ctrl+Delete",
+                        "description": "Edit.RemoveRow"
+                    },
+                    {
+                        "keybind": "Escape",
+                        "description": "Edit.SelectionCancel"
+                    },
+                    {
+                        "keybind": "Ctrl+4",
+                        "description": "Resources.Audio"
+                    },
+                    {
+                        "keybind": "Ctrl+5",
+                        "description": "Resources.Files"
+                    },
+                    {
+                        "keybind": "Ctrl+3",
+                        "description": "Resources.Icons"
+                    },
+                    {
+                        "keybind": "Ctrl+2",
+                        "description": "Resources.Images"
+                    },
+                    {
+                        "keybind": "Ctrl+6",
+                        "description": "Resources.Other"
+                    },
+                    {
+                        "keybind": "Ctrl+1",
+                        "description": "Resources.Strings"
+                    },
+                    {
+                        "keybind": "Alt+1",
+                        "description": "TeamFoundationContextMenus.MergeContextMenu.SetFocusonLeftWindow"
+                    },
+                    {
+                        "keybind": "Alt+2",
+                        "description": "TeamFoundationContextMenus.MergeContextMenu.SetFocusonResultWindow"
+                    },
+                    {
+                        "keybind": "Alt+3",
+                        "description": "TeamFoundationContextMenus.MergeContextMenu.SetFocusonRightWindow"
+                    },
+                    {
+                        "keybind": "Shift+Alt+C",
+                        "description": "SQL.SSDTSchemaCompareCompare"
+                    },
+                    {
+                        "keybind": "Shift+Alt+G",
+                        "description": "SQL.SSDTSchemaCompareGenerateScript"
+                    },
+                    {
+                        "keybind": "Shift+Alt+.",
+                        "description": "SQL.SSDTSchemaCompareNextChange"
+                    },
+                    {
+                        "keybind": "Shift+Alt+,",
+                        "description": "SQL.SSDTSchemaComparePreviousChange"
+                    },
+                    {
+                        "keybind": "Alt+Break",
+                        "description": "SQL.SSDTSchemaCompareStop"
+                    },
+                    {
+                        "keybind": "Shift+Alt+U",
+                        "description": "SQL.SSDTSchemaCompareWriteUpdates"
+                    },
+                    {
+                        "keybind": "Shift+Alt+U",
+                        "description": "CommitAllEdits"
+                    },
+                    {
+                        "keybind": "Ctrl+R, E",
+                        "description": "SQL.ExpandWildcards"
+                    },
+                    {
+                        "keybind": "Ctrl+R, Q",
+                        "description": "SQL.FullyqualifyNames"
+                    },
+                    {
+                        "keybind": "Ctrl+R, M",
+                        "description": "SQL.MovetoSchema"
+                    },
+                    {
+                        "keybind": "F2",
+                        "description": "SQL.Rename"
+                    },
+                    {
+                        "keybind": "Shift+Alt+PgDn",
+                        "description": "ViewFileInScriptPanel"
+                    },
+                    {
+                        "keybind": "Shift+Alt+U",
+                        "description": "CommitAllEdits"
+                    },
+                    {
+                        "keybind": "Alt+F5",
+                        "description": "SQL.ExecuteWithDebugger"
+                    },
+                    {
+                        "keybind": "Ctrl+R, E",
+                        "description": "SQL.ExpandWildcards"
+                    },
+                    {
+                        "keybind": "Ctrl+R, Q",
+                        "description": "SQL.FullyqualifyNames"
+                    },
+                    {
+                        "keybind": "Ctrl+R, M",
+                        "description": "SQL.MovetoSchema"
+                    },
+                    {
+                        "keybind": "F2",
+                        "description": "SQL.Rename"
+                    },
+                    {
+                        "keybind": "Alt+Break",
+                        "description": "SQL.TSqlEditorCancelQuery"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+E",
+                        "description": "SQL.TSqlEditorExecuteQuery"
+                    },
+                    {
+                        "keybind": "Ctrl+D, F",
+                        "description": "SQL.TSqlEditorResultsAsFile"
+                    },
+                    {
+                        "keybind": "Ctrl+D, G",
+                        "description": "SQL.TSqlEditorResultsAsGrid"
+                    },
+                    {
+                        "keybind": "Ctrl+D, T",
+                        "description": "SQL.TSqlEditorResultsAsText"
+                    },
+                    {
+                        "keybind": "Ctrl+D, E",
+                        "description": "SQL.TSqlEditorShowEstimatedPlan"
+                    },
+                    {
+                        "keybind": "Ctrl+D, A",
+                        "description": "SQL.TSqlEditorToggleExecutionPlan"
+                    },
+                    {
+                        "keybind": "Ctrl+D, R",
+                        "description": "SQL.TSqlEditorToggleResultsPane"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+N",
+                        "description": "TSqlEditorCloneQuery"
+                    },
+                    {
+                        "keybind": "Shift+Alt+PgDn",
+                        "description": "TSqlEditorDatabaseCombo"
+                    },
+                    {
+                        "keybind": "Alt+Break",
+                        "description": "SQL.TSqlEditorCancelQuery"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+E",
+                        "description": "SQL.TSqlEditorExecuteQuery"
+                    },
+                    {
+                        "keybind": "Ctrl+D, F",
+                        "description": "SQL.TSqlEditorResultsAsFile"
+                    },
+                    {
+                        "keybind": "Ctrl+D, G",
+                        "description": "SQL.TSqlEditorResultsAsGrid"
+                    },
+                    {
+                        "keybind": "Ctrl+D, T",
+                        "description": "SQL.TSqlEditorResultsAsText"
+                    },
+                    {
+                        "keybind": "Ctrl+D, E",
+                        "description": "SQL.TSqlEditorShowEstimatedPlan"
+                    },
+                    {
+                        "keybind": "Ctrl+D, A",
+                        "description": "SQL.TSqlEditorToggleExecutionPlan"
+                    },
+                    {
+                        "keybind": "Ctrl+D, R",
+                        "description": "SQL.TSqlEditorToggleResultsPane"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+N",
+                        "description": "TSqlEditorCloneQuery"
+                    },
+                    {
+                        "keybind": "Shift+Alt+PgDn",
+                        "description": "TSqlEditorDatabaseCombo"
+                    },
+                    {
+                        "keybind": "F12",
+                        "description": "PageInspector.Minimize"
+                    },
+                    {
+                        "keybind": "Ctrl+T",
+                        "description": "QueryDesigner.CancelRetrievingData"
+                    },
+                    {
+                        "keybind": "Ctrl+2",
+                        "description": "QueryDesigner.Criteria"
+                    },
+                    {
+                        "keybind": "Ctrl+1",
+                        "description": "QueryDesigner.Diagram"
+                    },
+                    {
+                        "keybind": "Ctrl+R",
+                        "description": "QueryDesigner.ExecuteSQL"
+                    },
+                    {
+                        "keybind": "Ctrl+G",
+                        "description": "QueryDesigner.GotoRow"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+J",
+                        "description": "QueryDesigner.JoinMode"
+                    },
+                    {
+                        "keybind": "Ctrl+4",
+                        "description": "QueryDesigner.Results"
+                    },
+                    {
+                        "keybind": "Ctrl+3",
+                        "description": "QueryDesigner.SQL"
+                    },
+                    {
+                        "keybind": "Alt+End",
+                        "description": "SQL.QueryResultsNewRow"
+                    },
+                    {
+                        "keybind": "Shift+Alt+R",
+                        "description": "SQL.QueryResultsRefresh"
+                    },
+                    {
+                        "keybind": "Alt+Break",
+                        "description": "SQL.QueryResultsStop"
+                    },
+                    {
+                        "keybind": "Enter",
+                        "description": "Edit.BreakLine"
+                    },
+                    {
+                        "keybind": "Left Arrow",
+                        "description": "Edit.CharLeft"
+                    },
+                    {
+                        "keybind": "Shift+Left Arrow",
+                        "description": "Edit.CharLeftExtend"
+                    },
+                    {
+                        "keybind": "Right Arrow",
+                        "description": "Edit.CharRight"
+                    },
+                    {
+                        "keybind": "Shift+Right Arrow",
+                        "description": "Edit.CharRightExtend"
+                    },
+                    {
+                        "keybind": "Tab",
+                        "description": "Edit.InsertTab"
+                    },
+                    {
+                        "keybind": "Down Arrow",
+                        "description": "Edit.LineDown"
+                    },
+                    {
+                        "keybind": "Shift+Down Arrow",
+                        "description": "Edit.LineDownExtend"
+                    },
+                    {
+                        "keybind": "Up Arrow",
+                        "description": "Edit.LineUp"
+                    },
+                    {
+                        "keybind": "Shift+Up Arrow",
+                        "description": "Edit.LineUpExtend"
+                    },
+                    {
+                        "keybind": "Ctrl+Down Arrow",
+                        "description": "Edit.MoveControlDown"
+                    },
+                    {
+                        "keybind": "Ctrl+Left Arrow",
+                        "description": "Edit.MoveControlLeft"
+                    },
+                    {
+                        "keybind": "Ctrl+Right Arrow",
+                        "description": "Edit.MoveControlRight"
+                    },
+                    {
+                        "keybind": "Ctrl+Up Arrow",
+                        "description": "Edit.MoveControlUp"
+                    },
+                    {
+                        "keybind": "Esc",
+                        "description": "Edit.SelectionCancel"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Down Arrow",
+                        "description": "Edit.SizeControlDown"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Left Arrow",
+                        "description": "Edit.SizeControlLeft"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Right Arrow",
+                        "description": "Edit.SizeControlRight"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Up Arrow",
+                        "description": "Edit.SizeControlUp"
+                    },
+                    {
+                        "keybind": "Shift+Tab",
+                        "description": "Edit.TabLeft"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+D",
+                        "description": "View.ReportData"
+                    },
+                    {
+                        "keybind": "F12",
+                        "description": "ArchitectureDesigner.Sequence.NavigateToCode"
+                    },
+                    {
+                        "keybind": "Shift+Del",
+                        "description": "Edit.Delete"
+                    },
+                    {
+                        "keybind": "F2",
+                        "description": "Edit.EditCell"
+                    },
+                    {
+                        "keybind": "Ctrl+Delete",
+                        "description": "Edit.RemoveRow"
+                    },
+                    {
+                        "keybind": "Esc",
+                        "description": "Edit.SelectionCancel"
+                    },
+                    {
+                        "keybind": "F7",
+                        "description": "View.ViewCode"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+G",
+                        "description": "ClassViewContextMenus.ClassViewProject.View.ViewinPageInspector"
+                    },
+                    {
+                        "keybind": "Delete",
+                        "description": "Edit.Delete"
+                    },
+                    {
+                        "keybind": "F2",
+                        "description": "File.Rename"
+                    },
+                    {
+                        "keybind": "Alt+Home",
+                        "description": "TeamFoundationContextMenus.Commands.GoToTeamExplorerNavigation"
+                    },
+                    {
+                        "keybind": "Alt+Down Arrow",
+                        "description": "TeamFoundationContextMenus.Commands.GoToTeamExplorerNextSectionContent"
+                    },
+                    {
+                        "keybind": "Alt+0",
+                        "description": "TeamFoundationContextMenus.Commands.GoToTeamExplorerPageContent"
+                    },
+                    {
+                        "keybind": "Alt+Up Arrow",
+                        "description": "TeamFoundationContextMenus.Commands.GoToTeamExplorerPreviousSectionContent"
+                    },
+                    {
+                        "keybind": "Alt+1",
+                        "description": "TeamFoundationContextMenus.Commands.GoToTeamExplorerSection1Content"
+                    },
+                    {
+                        "keybind": "Alt+2",
+                        "description": "TeamFoundationContextMenus.Commands.GoToTeamExplorerSection2Content"
+                    },
+                    {
+                        "keybind": "Alt+3",
+                        "description": "TeamFoundationContextMenus.Commands.GoToTeamExplorerSection3Content"
+                    },
+                    {
+                        "keybind": "Alt+4",
+                        "description": "TeamFoundationContextMenus.Commands.GoToTeamExplorerSection4Content"
+                    },
+                    {
+                        "keybind": "Alt+5",
+                        "description": "TeamFoundationContextMenus.Commands.GoToTeamExplorerSection5Content"
+                    },
+                    {
+                        "keybind": "Alt+6",
+                        "description": "TeamFoundationContextMenus.Commands.GoToTeamExplorerSection6Content"
+                    },
+                    {
+                        "keybind": "Alt+7",
+                        "description": "TeamFoundationContextMenus.Commands.GoToTeamExplorerSection7Content"
+                    },
+                    {
+                        "keybind": "Alt+8",
+                        "description": "TeamFoundationContextMenus.Commands.GoToTeamExplorerSection8Content"
+                    },
+                    {
+                        "keybind": "Alt+9",
+                        "description": "TeamFoundationContextMenus.Commands.GoToTeamExplorerSection9Content"
+                    },
+                    {
+                        "keybind": "Alt+Left Arrow",
+                        "description": "TeamFoundationContextMenus.Commands.TeamExplorerNavigateBackward"
+                    },
+                    {
+                        "keybind": "Alt+Right Arrow",
+                        "description": "TeamFoundationContextMenus.Commands.TeamExplorerNavigateForward"
+                    },
+                    {
+                        "keybind": "Shift+Alt+C",
+                        "description": "TeamFoundationContextMenus.MyWorkPageInProgress.TfsContextMyWorkPageCreateCopyWI"
+                    },
+                    {
+                        "keybind": "Shift+Alt+L",
+                        "description": "TeamFoundationContextMenus.MyWorkPageInProgress.TfsContextMyWorkPageNewLinkedWI"
+                    },
+                    {
+                        "keybind": "F5",
+                        "description": "View.Refresh"
+                    },
+                    {
+                        "keybind": "F12",
+                        "description": "TestExplorer.OpenTest"
+                    },
+                    {
+                        "keybind": "Enter",
+                        "description": "Edit.BreakLine"
+                    },
+                    {
+                        "keybind": "Left Arrow",
+                        "description": "Edit.CharLeft"
+                    },
+                    {
+                        "keybind": "Shift+Left Arrow",
+                        "description": "Edit.CharLeftExtend"
+                    },
+                    {
+                        "keybind": "Shift+Alt+Left Arrow",
+                        "description": "Edit.CharLeftExtendColumn"
+                    },
+                    {
+                        "keybind": "Right Arrow",
+                        "description": "Edit.CharRight"
+                    },
+                    {
+                        "keybind": "Shift+Right Arrow",
+                        "description": "Edit.CharRightExtend"
+                    },
+                    {
+                        "keybind": "Shift+Alt+Right Arrow",
+                        "description": "Edit.CharRightExtendColumn"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+L",
+                        "description": "Edit.ClearBookmarks"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+A",
+                        "description": "Edit.CollapseAllOutlining"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+S",
+                        "description": "Edit.CollapseCurrentRegion"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+T",
+                        "description": "Edit.CollapseTag"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+O",
+                        "description": "Edit.CollapseToDefinitions"
+                    },
+                    {
+                        "keybind": "Shift+Alt+-",
+                        "description": "Edit.ContractSelection"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+C",
+                        "description": "Edit.CommentSelection"
+                    },
+                    {
+                        "keybind": "Ctrl+Space",
+                        "description": "Edit.CompleteWord"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Alt+C",
+                        "description": "Edit.CopyParameterTip"
+                    },
+                    {
+                        "keybind": "Alt+,",
+                        "description": "Edit.DecreaseFilterLevel"
+                    },
+                    {
+                        "keybind": "Backspace",
+                        "description": "Edit.DeleteBackwards"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+\\",
+                        "description": "Edit.DeleteHorizontalWhiteSpace"
+                    },
+                    {
+                        "keybind": "Ctrl+End",
+                        "description": "Edit.DocumentEnd"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+End",
+                        "description": "Edit.DocumentEndExtend"
+                    },
+                    {
+                        "keybind": "Ctrl+Home",
+                        "description": "Edit.DocumentStart"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Home",
+                        "description": "Edit.DocumentStartExtend"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+X",
+                        "description": "Edit.ExpandAllOutlining"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+E",
+                        "description": "Edit.ExpandCurrentRegion"
+                    },
+                    {
+                        "keybind": "Shift+Alt+=",
+                        "description": "Edit.ExpandSelection"
+                    },
+                    {
+                        "keybind": "Shift+Alt+]",
+                        "description": "Edit.ExpandSelectiontoContainingBlock"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+D",
+                        "description": "Edit.FormatDocument"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+F",
+                        "description": "Edit.FormatSelection"
+                    },
+                    {
+                        "keybind": "Ctrl+T",
+                        "description": "Edit.GotoAll"
+                    },
+                    {
+                        "keybind": "Ctrl+]",
+                        "description": "Edit.GotoBrace"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+]",
+                        "description": "Edit.GotoBraceExtend"
+                    },
+                    {
+                        "keybind": "Ctrl+T,R",
+                        "description": "Edit.GotoRecent"
+                    },
+                    {
+                        "keybind": "Alt+PgDn",
+                        "description": "Edit.GotoNextIssueinFile"
+                    },
+                    {
+                        "keybind": "Alt+PgUp",
+                        "description": "Edit.GotoPreviousIssueinFile"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+H",
+                        "description": "Edit.HideSelection"
+                    },
+                    {
+                        "keybind": "Alt+.",
+                        "description": "Edit.IncreaseFilterLevel"
+                    },
+                    {
+                        "keybind": "Ctrl+I",
+                        "description": "Edit.IncrementalSearch"
+                    },
+                    {
+                        "keybind": "Shift+Alt+;",
+                        "description": "Edit.InsertCaretsatAllMatching"
+                    },
+                    {
+                        "keybind": "Shift+Alt+.",
+                        "description": "Edit.InsertNextMatchingCaret"
+                    },
+                    {
+                        "keybind": "Tab",
+                        "description": "Edit.InsertTab"
+                    },
+                    {
+                        "keybind": "Ctrl+L",
+                        "description": "Edit.LineCut"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+L",
+                        "description": "Edit.LineDelete"
+                    },
+                    {
+                        "keybind": "Down Arrow",
+                        "description": "Edit.LineDown"
+                    },
+                    {
+                        "keybind": "Shift+Down Arrow",
+                        "description": "Edit.LineDownExtend"
+                    },
+                    {
+                        "keybind": "Shift+Alt+Down Arrow",
+                        "description": "Edit.LineDownExtendColumn"
+                    },
+                    {
+                        "keybind": "End",
+                        "description": "Edit.LineEnd"
+                    },
+                    {
+                        "keybind": "Shift+End",
+                        "description": "Edit.LineEndExtend"
+                    },
+                    {
+                        "keybind": "Shift+Alt+End",
+                        "description": "Edit.LineEndExtendColumn"
+                    },
+                    {
+                        "keybind": "Ctrl+Enter",
+                        "description": "Edit.LineOpenAbove"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Enter",
+                        "description": "Edit.LineOpenBelow"
+                    },
+                    {
+                        "keybind": "Home",
+                        "description": "Edit.LineStart"
+                    },
+                    {
+                        "keybind": "Shift+Home",
+                        "description": "Edit.LineStartExtend"
+                    },
+                    {
+                        "keybind": "Shift+Alt+Home",
+                        "description": "Edit.LineStartExtendColumn"
+                    },
+                    {
+                        "keybind": "Shift+Alt+T",
+                        "description": "Edit.LineTranspose"
+                    },
+                    {
+                        "keybind": "Up Arrow",
+                        "description": "Edit.LineUp"
+                    },
+                    {
+                        "keybind": "Shift+Up Arrow",
+                        "description": "Edit.LineUpExtend"
+                    },
+                    {
+                        "keybind": "Shift+Alt+Up Arrow",
+                        "description": "Edit.LineUpExtendColumn"
+                    },
+                    {
+                        "keybind": "Ctrl+J",
+                        "description": "Edit.ListMembers"
+                    },
+                    {
+                        "keybind": "Ctrl+U",
+                        "description": "Edit.MakeLowercase"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+U",
+                        "description": "Edit.MakeUppercase"
+                    },
+                    {
+                        "keybind": "Alt+Down Arrow",
+                        "description": "Edit.MoveSelectedLinesDown"
+                    },
+                    {
+                        "keybind": "Alt+Up Arrow",
+                        "description": "Edit.MoveSelectedLinesUp"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Down Arrow",
+                        "description": "Edit.NextHighlightedReference"
+                    },
+                    {
+                        "keybind": "Insert",
+                        "description": "Edit.OvertypeMode"
+                    },
+                    {
+                        "keybind": "PgDn",
+                        "description": "Edit.PageDown"
+                    },
+                    {
+                        "keybind": "Shift+PgDn",
+                        "description": "Edit.PageDownExtend"
+                    },
+                    {
+                        "keybind": "PgUp",
+                        "description": "Edit.PageUp"
+                    },
+                    {
+                        "keybind": "Shift+PgUp",
+                        "description": "Edit.PageUpExtend"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Spacebar",
+                        "description": "Edit.ParameterInfo"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Alt+P",
+                        "description": "Edit.PasteParameterTip"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+-",
+                        "description": "Edit.PeekBackward"
+                    },
+                    {
+                        "keybind": "Alt+F12",
+                        "description": "Edit.PeekDefinition"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+=",
+                        "description": "Edit.PeekForward"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Up Arrow",
+                        "description": "Edit.PreviousHighlightedReference"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+I",
+                        "description": "Edit.QuickInfo"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+I",
+                        "description": "Edit.ReverseIncrementalSearch"
+                    },
+                    {
+                        "keybind": "Ctrl+Down Arrow",
+                        "description": "Edit.ScrollLineDown"
+                    },
+                    {
+                        "keybind": "Ctrl+Up Arrow",
+                        "description": "Edit.ScrollLineUp"
+                    },
+                    {
+                        "keybind": "Ctrl+W",
+                        "description": "Edit.SelectCurrentWord"
+                    },
+                    {
+                        "keybind": "Escape",
+                        "description": "Edit.SelectionCancel"
+                    },
+                    {
+                        "keybind": "Ctrl+=",
+                        "description": "Edit.SelectToLastGoBack"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+`",
+                        "description": "Edit.ShowCodeLensMenu"
+                    },
+                    {
+                        "keybind": "Alt+`",
+                        "description": "Edit.ShowNavigateMenu"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+U",
+                        "description": "Edit.StopHidingCurrent"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+P",
+                        "description": "Edit.StopOutlining"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+A",
+                        "description": "Edit.SwapAnchor"
+                    },
+                    {
+                        "keybind": "Shift+Tab",
+                        "description": "Edit.TabLeft"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+L",
+                        "description": "Edit.ToggleAllOutlining"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+K",
+                        "description": "Edit.ToggleBookmark"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+Space",
+                        "description": "Edit.ToggleCompletionMode"
+                    },
+                    {
+                        "keybind": "Ctrl+M, Ctrl+M",
+                        "description": "Edit.ToggleOutliningExpansion"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+H",
+                        "description": "Edit.ToggleTaskListShortcut"
+                    },
+                    {
+                        "keybind": "Ctrl+E, Ctrl+W",
+                        "description": "Edit.ToggleWordWrap"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+U",
+                        "description": "Edit.UncommentSelection"
+                    },
+                    {
+                        "keybind": "Ctrl+PgDn",
+                        "description": "Edit.ViewBottom"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+PgDn",
+                        "description": "Edit.ViewBottomExtend"
+                    },
+                    {
+                        "keybind": "Ctrl+PgUp",
+                        "description": "Edit.ViewTop"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+PgUp",
+                        "description": "Edit.ViewTopExtend"
+                    },
+                    {
+                        "keybind": "Ctrl+R, Ctrl+W",
+                        "description": "Edit.ViewWhiteSpace"
+                    },
+                    {
+                        "keybind": "Ctrl+Delete",
+                        "description": "Edit.WordDeleteToEnd"
+                    },
+                    {
+                        "keybind": "Ctrl+Backspace",
+                        "description": "Edit.WordDeleteToStart"
+                    },
+                    {
+                        "keybind": "Ctrl+Right Arrow",
+                        "description": "Edit.WordNext"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Right Arrow",
+                        "description": "Edit.WordNextExtend"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Alt+Right Arrow",
+                        "description": "Edit.WordNextExtendColumn"
+                    },
+                    {
+                        "keybind": "Ctrl+Left Arrow",
+                        "description": "Edit.WordPrevious"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Left Arrow",
+                        "description": "Edit.WordPreviousExtend"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Alt+Left Arrow",
+                        "description": "Edit.WordPreviousExtendColumn"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+T",
+                        "description": "Edit.WordTranspose"
+                    },
+                    {
+                        "keybind": "Alt+Enter",
+                        "description": "EditorContextMenus.CodeWindow.ExecuteInInteractive"
+                    },
+                    {
+                        "keybind": "Alt+'",
+                        "description": "EditorContextMenus.CodeWindow.ExecuteLineInInteractive"
+                    },
+                    {
+                        "keybind": "Ctrl+K, Ctrl+G",
+                        "description": "OtherContextMenus.HTMLContext.ViewinPageInspector"
+                    },
+                    {
+                        "keybind": "Alt+PgDn",
+                        "description": "TeamFoundationContextMenus.Annotate.TfsAnnotateMoveNextRegion"
+                    },
+                    {
+                        "keybind": "Alt+PgUp",
+                        "description": "TeamFoundationContextMenus.Annotate.TfsAnnotateMovePreviousRegion"
+                    },
+                    {
+                        "keybind": "Shift+Del",
+                        "description": "Edit.Delete"
+                    },
+                    {
+                        "keybind": "Shift+Del",
+                        "description": "Edit.DeleteFromModel"
+                    },
+                    {
+                        "keybind": "Shift+Del",
+                        "description": "Edit.DeleteFromModel"
+                    },
+                    {
+                        "keybind": "Shift+Del",
+                        "description": "Edit.DeleteFromModel"
+                    },
+                    {
+                        "keybind": "Insert",
+                        "description": "Edit.NewAccelerator"
+                    },
+                    {
+                        "keybind": "Ctrl+W",
+                        "description": "Edit.NextKeyTyped"
+                    },
+                    {
+                        "keybind": "Down Arrow",
+                        "description": "Edit.MoveControlDown"
+                    },
+                    {
+                        "keybind": "Left Arrow",
+                        "description": "Edit.MoveControlLeft"
+                    },
+                    {
+                        "keybind": "Right Arrow",
+                        "description": "Edit.MoveControlRight"
+                    },
+                    {
+                        "keybind": "Up Arrow",
+                        "description": "Edit.MoveControlUp"
+                    },
+                    {
+                        "keybind": "Ctrl+Left Arrow",
+                        "description": "Edit.ScrollColumnLeft"
+                    },
+                    {
+                        "keybind": "Ctrl+Right Arrow",
+                        "description": "Edit.ScrollColumnRight"
+                    },
+                    {
+                        "keybind": "Ctrl+Down Arrow",
+                        "description": "Edit.ScrollLineDown"
+                    },
+                    {
+                        "keybind": "Ctrl+Up Arrow",
+                        "description": "Edit.ScrollLineUp"
+                    },
+                    {
+                        "keybind": "Shift+Down Arrow",
+                        "description": "Edit.SizeControlDown"
+                    },
+                    {
+                        "keybind": "Shift+Left Arrow",
+                        "description": "Edit.SizeControlLeft"
+                    },
+                    {
+                        "keybind": "Shift+Right Arrow",
+                        "description": "Edit.SizeControlRight"
+                    },
+                    {
+                        "keybind": "Shift+Up Arrow",
+                        "description": "Edit.SizeControlUp"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Down Arrow",
+                        "description": "Format.AlignBottoms"
+                    },
+                    {
+                        "keybind": "Shift+F9",
+                        "description": "Format.AlignCenters"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Left Arrow",
+                        "description": "Format.AlignLefts"
+                    },
+                    {
+                        "keybind": "F9",
+                        "description": "Format.AlignMiddles"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Right Arrow",
+                        "description": "Format.AlignRights"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Up Arrow",
+                        "description": "Format.AlignTops"
+                    },
+                    {
+                        "keybind": "Ctrl+B",
+                        "description": "Format.ButtonBottom"
+                    },
+                    {
+                        "keybind": "Ctrl+R",
+                        "description": "Format.ButtonRight"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+F9",
+                        "description": "Format.CenterHorizontal"
+                    },
+                    {
+                        "keybind": "Ctrl+F9",
+                        "description": "Format.CenterVertical"
+                    },
+                    {
+                        "keybind": "Ctrl+M",
+                        "description": "Format.CheckMnemonics"
+                    },
+                    {
+                        "keybind": "Shift+F7",
+                        "description": "Format.SizetoContent"
+                    },
+                    {
+                        "keybind": "Alt+Right Arrow",
+                        "description": "Format.SpaceAcross"
+                    },
+                    {
+                        "keybind": "Alt+Up Arrow",
+                        "description": "Format.SpaceDown"
+                    },
+                    {
+                        "keybind": "Ctrl+D",
+                        "description": "Format.TabOrder"
+                    },
+                    {
+                        "keybind": "Ctrl+T",
+                        "description": "Format.TestDialog"
+                    },
+                    {
+                        "keybind": "Ctrl+G",
+                        "description": "Format.ToggleGuides"
+                    },
+                    {
+                        "keybind": "Ctrl+A",
+                        "description": "Image.AirbrushTool"
+                    },
+                    {
+                        "keybind": "Ctrl+B",
+                        "description": "Image.BrushTool"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+U",
+                        "description": "Image.CopyandOutlineSelection"
+                    },
+                    {
+                        "keybind": "Ctrl+J",
+                        "description": "Image.DrawOpaque"
+                    },
+                    {
+                        "keybind": "Alt+P",
+                        "description": "Image.EllipseTool"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+I",
+                        "description": "Image.EraseTool"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Alt+P",
+                        "description": "Image.FilledEllipseTool"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Alt+R",
+                        "description": "Image.FilledRectangleTool"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Alt+W",
+                        "description": "Image.FilledRoundedRectangleTool"
+                    },
+                    {
+                        "keybind": "Ctrl+F",
+                        "description": "Image.FillTool"
+                    },
+                    {
+                        "keybind": "Ctrl+H",
+                        "description": "Image.FlipHorizontal"
+                    },
+                    {
+                        "keybind": "Shift+Alt+H",
+                        "description": "Image.FlipVertical"
+                    },
+                    {
+                        "keybind": "Ctrl+=",
+                        "description": "Image.LargerBrush"
+                    },
+                    {
+                        "keybind": "Ctrl+L",
+                        "description": "Image.LineTool"
+                    },
+                    {
+                        "keybind": "Ctrl+M",
+                        "description": "Image.MagnificationTool"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+M",
+                        "description": "Image.Magnify"
+                    },
+                    {
+                        "keybind": "Insert",
+                        "description": "Image.NewImageType"
+                    },
+                    {
+                        "keybind": "Ctrl+]",
+                        "description": "Image.NextColor"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+]",
+                        "description": "Image.NextRightColor"
+                    },
+                    {
+                        "keybind": "Shift+Alt+P",
+                        "description": "Image.OutlinedEllipseTool"
+                    },
+                    {
+                        "keybind": "Shift+Alt+R",
+                        "description": "Image.OutlinedRectangleTool"
+                    },
+                    {
+                        "keybind": "Shift+Alt+W",
+                        "description": "Image.OutlinedRoundedRectangleTool"
+                    },
+                    {
+                        "keybind": "Ctrl+I",
+                        "description": "Image.PencilTool"
+                    },
+                    {
+                        "keybind": "Ctrl+[",
+                        "description": "Image.PreviousColor"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+[",
+                        "description": "Image.PreviousRightColor"
+                    },
+                    {
+                        "keybind": "Shift+Alt+S",
+                        "description": "Image.RectangleSelectionTool"
+                    },
+                    {
+                        "keybind": "Alt+R",
+                        "description": "Image.RectangleTool"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+H",
+                        "description": "Image.Rotate90Degrees"
+                    },
+                    {
+                        "keybind": "Alt+W",
+                        "description": "Image.RoundedRectangleTool"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+S",
+                        "description": "Image.ShowGrid"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Alt+S",
+                        "description": "Image.ShowTileGrid"
+                    },
+                    {
+                        "keybind": "Ctrl+.",
+                        "description": "Image.SmallBrush"
+                    },
+                    {
+                        "keybind": "Ctrl+-",
+                        "description": "Image.SmallerBrush"
+                    },
+                    {
+                        "keybind": "Ctrl+T",
+                        "description": "Image.TextTool"
+                    },
+                    {
+                        "keybind": "Ctrl+U",
+                        "description": "Image.UseSelectionasBrush"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+.",
+                        "description": "Image.ZoomIn"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+,",
+                        "description": "Image.ZoomOut"
+                    },
+                    {
+                        "keybind": "Insert",
+                        "description": "Edit.NewString"
+                    },
+                    {
+                        "keybind": "Ctrl+T",
+                        "description": "QueryDesigner.CancelRetrievingData"
+                    },
+                    {
+                        "keybind": "Ctrl+2",
+                        "description": "QueryDesigner.Criteria"
+                    },
+                    {
+                        "keybind": "Ctrl+1",
+                        "description": "QueryDesigner.Diagram"
+                    },
+                    {
+                        "keybind": "Ctrl+R",
+                        "description": "QueryDesigner.ExecuteSQL"
+                    },
+                    {
+                        "keybind": "Ctrl+G",
+                        "description": "QueryDesigner.GotoRow"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+J",
+                        "description": "QueryDesigner.JoinMode"
+                    },
+                    {
+                        "keybind": "Ctrl+4",
+                        "description": "QueryDesigner.Results"
+                    },
+                    {
+                        "keybind": "Ctrl+3",
+                        "description": "QueryDesigner.SQL"
+                    },
+                    {
+                        "keybind": "Ctrl+1",
+                        "description": "OtherContextMenus.ORDesignerContext.HideMethodsPane"
+                    },
+                    {
+                        "keybind": "Enter",
+                        "description": "Edit.BreakLine"
+                    },
+                    {
+                        "keybind": "Left Arrow",
+                        "description": "Edit.CharLeft"
+                    },
+                    {
+                        "keybind": "Shift+Left Arrow",
+                        "description": "Edit.CharLeftExtend"
+                    },
+                    {
+                        "keybind": "Right Arrow",
+                        "description": "Edit.CharRight"
+                    },
+                    {
+                        "keybind": "Shift+Right Arrow",
+                        "description": "Edit.CharRightExtend"
+                    },
+                    {
+                        "keybind": "End",
+                        "description": "Edit.DocumentEnd"
+                    },
+                    {
+                        "keybind": "Shift+End",
+                        "description": "Edit.DocumentEndExtend"
+                    },
+                    {
+                        "keybind": "Home",
+                        "description": "Edit.DocumentStart"
+                    },
+                    {
+                        "keybind": "Shift+Home",
+                        "description": "Edit.DocumentStartExtend"
+                    },
+                    {
+                        "keybind": "Tab",
+                        "description": "Edit.InsertTab"
+                    },
+                    {
+                        "keybind": "Down Arrow",
+                        "description": "Edit.LineDown"
+                    },
+                    {
+                        "keybind": "Shift+Up Arrow",
+                        "description": "Edit.LineDownExtend"
+                    },
+                    {
+                        "keybind": "Up Arrow",
+                        "description": "Edit.LineUp"
+                    },
+                    {
+                        "keybind": "Shift+Down Arrow",
+                        "description": "Edit.LineUpExtend"
+                    },
+                    {
+                        "keybind": "Ctrl+Down Arrow",
+                        "description": "Edit.MoveControlDown"
+                    },
+                    {
+                        "keybind": "Ctrl+Left Arrow",
+                        "description": "Edit.MoveControlLeft"
+                    },
+                    {
+                        "keybind": "Ctrl+Right Arrow",
+                        "description": "Edit.MoveControlRight"
+                    },
+                    {
+                        "keybind": "Ctrl+Up Arrow",
+                        "description": "Edit.MoveControlUp"
+                    },
+                    {
+                        "keybind": "Escape",
+                        "description": "Edit.SelectionCancel"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Down Arrow",
+                        "description": "Edit.SizeControlDown"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Left Arrow",
+                        "description": "Edit.SizeControlLeft"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Right Arrow",
+                        "description": "Edit.SizeControlRight"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Up Arrow",
+                        "description": "Edit.SizeControlUp"
+                    },
+                    {
+                        "keybind": "Shift+Tab",
+                        "description": "Edit.TabLeft"
+                    },
+                    {
+                        "keybind": "Shift+Alt+C",
+                        "description": "Edit.CreateCopyofWorkItem"
+                    },
+                    {
+                        "keybind": "F5",
+                        "description": "Edit.RefreshWorkItem"
+                    },
+                    {
+                        "keybind": "Shift+Alt+L",
+                        "description": "Team.NewLinkedWorkItem"
+                    },
+                    {
+                        "keybind": "Shift+Alt+C",
+                        "description": "Edit.CreateCopyofWorkItem"
+                    },
+                    {
+                        "keybind": "Shift+Alt+Right Arrow",
+                        "description": "Edit.Indent"
+                    },
+                    {
+                        "keybind": "Shift+Alt+Left Arrow",
+                        "description": "Edit.Outdent"
+                    },
+                    {
+                        "keybind": "Shift+Alt+L",
+                        "description": "Team.NewLinkedWorkItem"
+                    },
+                    {
+                        "keybind": "F5",
+                        "description": "Team.Refresh"
+                    },
+                    {
+                        "keybind": "Shift+Alt+V",
+                        "description": "Window.Toggle"
+                    },
+                    {
+                        "keybind": "Shift+Alt+C",
+                        "description": "Edit.CreateCopyofWorkItem"
+                    },
+                    {
+                        "keybind": "Shift+Alt+Right Arrow",
+                        "description": "Edit.Indent"
+                    },
+                    {
+                        "keybind": "Shift+Alt+Left Arrow",
+                        "description": "Edit.Outdent"
+                    },
+                    {
+                        "keybind": "Shift+Alt+N",
+                        "description": "Team.GotoNextWorkItem"
+                    },
+                    {
+                        "keybind": "Shift+Alt+P",
+                        "description": "Team.GotoPreviousWorkItem"
+                    },
+                    {
+                        "keybind": "Shift+Alt+L",
+                        "description": "Team.NewLinkedWorkItem"
+                    },
+                    {
+                        "keybind": "F5",
+                        "description": "Team.Refresh"
+                    },
+                    {
+                        "keybind": "Shift+Alt+V",
+                        "description": "Window.Toggle"
+                    },
+                    {
+                        "keybind": "Ctrl+K, W",
+                        "description": "Edit.CompleteWord"
+                    },
+                    {
+                        "keybind": "Alt+,",
+                        "description": "Edit.DecreaseFilterLevel"
+                    },
+                    {
+                        "keybind": "Alt+.",
+                        "description": "Edit.IncreaseFilterLevel"
+                    },
+                    {
+                        "keybind": "Ctrl+K, L",
+                        "description": "Edit.ListMembers"
+                    },
+                    {
+                        "keybind": "Ctrl+K, P",
+                        "description": "Edit.ParameterInfo"
+                    },
+                    {
+                        "keybind": "Ctrl+K, I",
+                        "description": "Edit.QuickInfo"
+                    },
+                    {
+                        "keybind": "Ctrl+E, Ctrl+C",
+                        "description": "WorkflowDesigner.Collapse"
+                    },
+                    {
+                        "keybind": "Ctrl+E, Ctrl+F",
+                        "description": "WorkflowDesigner.ConnectNodes"
+                    },
+                    {
+                        "keybind": "Ctrl+E, Ctrl+N",
+                        "description": "WorkflowDesigner.CreateVariable"
+                    },
+                    {
+                        "keybind": "Ctrl+E, Ctrl+X",
+                        "description": "WorkflowDesigner.ExpandAll"
+                    },
+                    {
+                        "keybind": "Ctrl+E, Ctrl+E",
+                        "description": "WorkflowDesigner.ExpandInPlace"
+                    },
+                    {
+                        "keybind": "Ctrl+E, Ctrl+P",
+                        "description": "WorkflowDesigner.GoToParent"
+                    },
+                    {
+                        "keybind": "Ctrl+E, Ctrl+M",
+                        "description": "WorkflowDesigner.MoveFocus"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+F6",
+                        "description": "WorkflowDesigner.NavigateThroughDesigner"
+                    },
+                    {
+                        "keybind": "Ctrl+E, Ctrl+R",
+                        "description": "WorkflowDesigner.Restore"
+                    },
+                    {
+                        "keybind": "Ctrl+E, Ctrl+A",
+                        "description": "WorkflowDesigner.ShowHideArgumentDesigner"
+                    },
+                    {
+                        "keybind": "Ctrl+E, Ctrl+I",
+                        "description": "WorkflowDesigner.ShowHideImportsDesigner"
+                    },
+                    {
+                        "keybind": "Ctrl+E, Ctrl+O",
+                        "description": "WorkflowDesigner.ShowHideOverviewMap"
+                    },
+                    {
+                        "keybind": "Ctrl+E, Ctrl+V",
+                        "description": "WorkflowDesigner.ShowHideVariableDesigner"
+                    },
+                    {
+                        "keybind": "Ctrl+E, Ctrl+S",
+                        "description": "WorkflowDesigner.ToggleSelection"
+                    },
+                    {
+                        "keybind": "Ctrl+Num +",
+                        "description": "WorkflowDesigner.ZoomIn"
+                    },
+                    {
+                        "keybind": "Ctrl+Num -",
+                        "description": "WorkflowDesigner.ZoomOut"
+                    },
+                    {
+                        "keybind": "Ctrl+0",
+                        "description": "Design.FitAll"
+                    },
+                    {
+                        "keybind": "F9",
+                        "description": "Design.ShowHandles"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+=",
+                        "description": "Design.ZoomIn"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+-",
+                        "description": "Design.ZoomOut"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+;",
+                        "description": "Designer options"
+                    },
+                    {
+                        "keybind": "F2",
+                        "description": "Format.EditText"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+R",
+                        "description": "Format.ResetLayout.All"
+                    },
+                    {
+                        "keybind": "Ctrl+F9",
+                        "description": "Run project code"
+                    },
+                    {
+                        "keybind": "Ctrl+H",
+                        "description": "Timeline.Hide (Blend only)"
+                    },
+                    {
+                        "keybind": "Ctrl+L",
+                        "description": "Timeline.Lock (Blend only)"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+H",
+                        "description": "Timeline.Show (Blend only)"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+L",
+                        "description": "Timeline.Unlock (Blend only)"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+,",
+                        "description": "View.EdgeLeftMoveLeft"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+.",
+                        "description": "View.EdgeLeftMoveRight"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Alt+,",
+                        "description": "View.EdgeRightMoveLeft"
+                    },
+                    {
+                        "keybind": "Ctrl+Shift+Alt+.",
+                        "description": "View.EdgeRightMoveRight"
+                    },
+                    {
+                        "keybind": "Ctrl+Spacebar",
+                        "description": "View.ShowPropertyMarkerMenu"
+                    },
+                    {
+                        "keybind": "Alt+F5",
+                        "description": "XML.StartXSLTDebugging"
+                    },
+                    {
+                        "keybind": "Ctrl+Alt+F5",
+                        "description": "XML.StartXSLTWithoutDebugging"
+                    }
+                ];
+                
+                Date.prototype.getWeek = function() {
+                    var date = new Date(this.getTime());
+                    date.setHours(0, 0, 0, 0);
+                    // Thursday in current week decides the year.
+                    date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+                    // January 4 is always in week 1.
+                    var week1 = new Date(date.getFullYear(), 0, 4);
+                    // Adjust to Thursday in week 1 and count number of weeks from date to week1.
+                    return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+                }
+                
+                var date = new Date();
+                var week = date.getWeek().toString();
+                var year = date.getFullYear().toString();
+
+                var seed = parseInt(year + week, 10);
+
+                Math.seed = seed;
+
+                /**
+                * Math.seededRandom()
+                * 
+                */
+                Math.seededRandom = function(max, min) {
+                    max = max || 1;
+                    min = min || 0;
+
+                    Math.seed = (Math.seed * 9301 + 49297) % 233280;
+                    var rnd = Math.seed / 233280.0;
+
+                    return min + rnd * (max - min);
+                }
+                
+                const setShortcut = () => { 
+                    var shortcutNumber = Math.floor(Math.seededRandom(0, shortcuts.length + 1));
+                
+                    var descriptionText = shortcuts[shortcutNumber].description;
+
+                    var descriptionArray = descriptionText.split('.');
+
+                    var intermediateText = "";
+
+                    for(var i = 1; i < descriptionArray.length; i++) {
+                        intermediateText += descriptionArray[i];
+                    }
+
+                    var descriptionText = `${descriptionArray[0]}: ${intermediateText}`;
+
+                    $('.shortcut').html(shortcuts[shortcutNumber].keybind);
+                    $('.description').html(descriptionText);
+                }
+                setShortcut();
+                $('.description').click(setShortcut);
+                $('.shortcut').click(() => window.location = "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+            });
+        </script>
+      </body> 
+    </html>
