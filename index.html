@@ -2,21 +2,12 @@
     <html>
       <head>
           <title>Learn 1 shortcut every week!</title>
-            <!-- Global site tag (gtag.js) - Google Analytics -->
-            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-172825060-1"></script>
-            <script>
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', 'UA-172825060-1');
-            </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <style>
-            .wrapper { 
+            .wrapper {
                 font-family: sans-serif;
                 margin: auto;
-                
+
                 padding-top: 10%;
                 width: 50%;
             }
@@ -39,7 +30,7 @@
             <div class="shortcut"></div>
             <div class="description"></div>
         </div>
-    
+
         <script type="text/javascript">
             $(document).ready(function(){
                 const shortcuts = [
@@ -3020,7 +3011,7 @@
                         "description": "XML.StartXSLTWithoutDebugging"
                     }
                 ];
-                
+
                 Date.prototype.getWeek = function() {
                     var date = new Date(this.getTime());
                     date.setHours(0, 0, 0, 0);
@@ -3031,7 +3022,7 @@
                     // Adjust to Thursday in week 1 and count number of weeks from date to week1.
                     return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
                 }
-                
+
                 var date = new Date();
                 var week = date.getWeek().toString();
                 var year = date.getFullYear().toString();
@@ -3042,7 +3033,7 @@
 
                 /**
                 * Math.seededRandom()
-                * 
+                *
                 */
                 Math.seededRandom = function(max, min) {
                     max = max || 1;
@@ -3053,10 +3044,10 @@
 
                     return min + rnd * (max - min);
                 }
-                
-                const setShortcut = () => { 
+
+                const setShortcut = () => {
                     var shortcutNumber = Math.floor(Math.seededRandom(0, shortcuts.length + 1));
-                
+
                     var descriptionText = shortcuts[shortcutNumber].description;
 
                     var descriptionArray = descriptionText.split('.');
@@ -3077,5 +3068,5 @@
                 $('.shortcut').click(() => window.location = "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
             });
         </script>
-      </body> 
+      </body>
     </html>
